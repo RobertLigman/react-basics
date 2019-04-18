@@ -10,6 +10,7 @@ var config = {
         filename: "bundle.js",
         publicPath: "/app/"
     },
+    mode:'none',
     module: {
         rules: [
             {
@@ -19,7 +20,25 @@ var config = {
                 query:{
                     presets:["@babel/preset-env","@babel/preset-react"]
                 }
-            }
+            },
+            
+            {
+                test:/\.css?/,
+                include:SRC_DIR,
+                use: ['style-loader','css-loader']
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                  {
+                    loader: 'url-loader',
+                    options: {
+                      limit: 8192
+                    }
+                  }
+                ]
+              }
+
                 
         ]
     }
